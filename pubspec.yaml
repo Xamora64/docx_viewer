@@ -15,8 +15,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  docx_to_text: ^1.0.1
+  docx_to_text: any
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

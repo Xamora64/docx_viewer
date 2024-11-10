@@ -1,39 +1,79 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+# Docx_Viewer
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package for displaying DOCX files as text in your app. This package uses the `docx_to_text` package to read DOCX files and display their content as text.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Read and display the content of DOCX files.
+- Supports `.docx` and `.doc` file formats.
+- Handles file validation, such as checking if the file exists and if the file type is supported.
+- Provides a customizable error handling callback via the `onError` parameter.
+- Optionally customize the font size for displaying the text.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- To use this package, add `docx_viewer` to your `pubspec.yaml` file:
+```yaml
+dependencies:
+  docx_viewer: ^0.1.0
+```
+- Then run:
+```bash
+flutter pub get
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Here's an example of how to use the `DocxView` widget:
 
 ```dart
-const like = 'sample';
+import 'package:docx_viewer/docx_viewer.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('DOCX Viewer')),
+      body: DocxView(
+        filePath: '/path/to/your/document.docx',
+        fontSize: 18, // Optional: Adjust the font size
+        onError: (error) {
+          // Handle error if provided
+          print(error);
+        },
+      ),
+    ),
+  ));
+}
 ```
 
-## Additional information
+### Parameters:
+- `filePath`: The path to the DOCX file to display (required).
+- `fontSize`: The font size for displaying the text (optional, default is 16).
+- `onError`: A callback to handle errors if the file can't be loaded (optional).
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Error Handling
+
+If the DOCX file path is empty, the file type is unsupported, or the file doesn't exist, an error message will be displayed. If you provide an `onError` callback, it will be invoked with the error.
+
+## Contributing
+We welcome contributions! If you'd like to contribute to this Flutter Package Project, please check out our [Contribution Guidelines](Contribution.md).
+
+## Code of Conduct
+Please review our [Code of Conduct](CodeOfConduct.md) before participating in this app.
+
+## License
+This project is licensed under the MIT [License](LICENSE).
+
+
+## Author
+
+Your Name - [Santosh Bhandari](mailto:info@bhandari-santosh.com.np)
+
+<!-- 
+## Support Development
+
+If you find this package helpful and would like to support its development, consider making a donation. Your support is greatly appreciated and will help me create more open-source projects like this one. 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/yourusername)
+``` -->

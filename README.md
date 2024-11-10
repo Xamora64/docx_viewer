@@ -68,12 +68,19 @@ This project is licensed under the MIT [License](LICENSE).
 
 ## Author
 
-Your Name - [Santosh Bhandari](mailto:info@bhandari-santosh.com.np)
+[Santosh Bhandari](mailto:info@bhandari-santosh.com.np)
 
-<!-- 
 ## Support Development
 
-If you find this package helpful and would like to support its development, consider making a donation. Your support is greatly appreciated and will help me create more open-source projects like this one. 
+If you find this package helpful and would like to support its development, consider contributing through one of these platforms:
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/yourusername)
-``` -->
+### These are supported funding model platforms:
+
+- **GitHub Sponsors**: [santoshvandari](https://github.com/sponsors/santoshvandari)
+- **Open Collective**: [santoshvandari](https://opencollective.com/santoshvandari)
+- **Ko-fi**: [santoshvandari](https://ko-fi.com/santoshvandari)
+- **Buy Me a Coffee**: [santoshvandari](https://www.buymeacoffee.com/santoshvandari)
+
+
+### Thank you for your support!
+

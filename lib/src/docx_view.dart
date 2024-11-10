@@ -1,71 +1,90 @@
-import 'dart:io'; // Import the dart:io package for file handling
-import 'package:docx_to_text/docx_to_text.dart'; // Import the docx_to_text package for extracting text from .docx files
-import 'package:docx_viewer/utils/support_type.dart'; // Import support types for file extensions (e.g., .docx, .doc)
-import 'package:flutter/material.dart'; // Import Flutter material design package
+import 'dart:io';
+import 'package:docx_to_text/docx_to_text.dart';
+import 'package:docx_viewer/utils/support_type.dart';
+import 'package:flutter/material.dart';
 
-// Widget to display DOCX file content in a scrollable view.
+/// A widget for displaying Word documents, including .doc and .docx file types.
+///
+/// The [DocxView] widget takes a [filePath], an optional [fontSize], and an optional [onError] callback function.
+/// It reads the content of the DOCX file and displays it as text within a Flutter application.
+///
+/// Supported document types:
+/// - DOCX: Displayed as text after converting from DOCX binary format using the [docx_to_text] package.
+///
+/// Example usage:
+/// ```dart
+/// DocxView(filePath: '/path/to/your/document.docx')
+/// ```
 class DocxView extends StatefulWidget {
-  final String filePath; // The path of the DOCX file to load
-  final int fontSize; // The font size to display the text
-  final Function(Exception)?
-      onError; // Optional callback function for error handling
+  final String filePath; // The path to the DOCX file you want to display
+  final int fontSize; // Optional font size for displaying the text
+  final Function(Exception)? onError; // Optional callback for handling errors
 
+  /// Creates a [DocxView] widget.
+  ///
+  /// [filePath] is required, representing the path of the DOCX file to display.
+  /// [fontSize] is optional and defaults to 16 if not specified.
+  /// [onError] is an optional callback for handling errors.
   const DocxView({
-    super.key, // Required for widget identification
-    required this.filePath, // Required parameter: file path to the DOCX file
-    this.fontSize = 16, // Optional parameter: default font size is 16
+    super.key,
+    required this.filePath, // File path is required to load the DOCX file
+    this.fontSize = 16, // Default font size if not provided
     this.onError, // Optional error callback
   });
 
   @override
-  State<DocxView> createState() =>
-      _DocxViewState(); // Create state for the widget
+  State<DocxView> createState() => _DocxViewState();
 }
 
 class _DocxViewState extends State<DocxView> {
-  String? fileContent; // Variable to hold the extracted text from DOCX
-  bool isLoading = true; // Boolean to manage the loading state of the widget
+  String? fileContent; // Variable to hold the text content of the DOCX file
+  bool isLoading = true; // Boolean to track if the content is loading
 
-  static const double _padding = 10.0; // Padding for the widget's content
+  static const double _padding = 10.0; // Padding for the widget
 
   @override
   void initState() {
+    _validateAndLoadDocxContent(); // Validate and load DOCX content on widget initialization
     super.initState();
-    _validateAndLoadDocxContent(); // Validate and load DOCX content when the widget initializes
   }
 
-  // Method to validate the file path and extension, and load the content
+  /// Validates the file path and file extension, then loads the DOCX content.
+  ///
+  /// This method checks if the file path is not empty, if the file type is either .doc or .docx,
+  /// and if the file exists. If any of these conditions fail, an error is triggered.
   Future<void> _validateAndLoadDocxContent() async {
     // Check if the file path is empty
     if (widget.filePath.isEmpty) {
       _handleError(Exception(
-          "File path is empty.")); // Call error handler if path is empty
+          "File path is empty.")); // Trigger error if the path is empty
       return;
     }
 
-    // Get the file extension (e.g., docx, doc) and convert to lowercase
     final fileExtension = widget.filePath.split('.').last.toLowerCase();
 
-    // Check if the file extension is supported (either .docx or .doc)
+    // Check if the file extension is supported (DOCX or DOC)
     if (fileExtension != Supporttype.docx && fileExtension != Supporttype.doc) {
       _handleError(Exception(
-          "Unsupported file type: .$fileExtension")); // Call error handler if unsupported extension
+          "Unsupported file type: .$fileExtension")); // Trigger error for unsupported file types
       return;
     }
 
-    // Check if the file exists at the specified path
+    // Create a File object and check if the file exists
     final file = File(widget.filePath);
     if (!(await file.exists())) {
       _handleError(Exception(
-          "File not found: ${widget.filePath}")); // Call error handler if file doesn't exist
+          "File not found: ${widget.filePath}")); // Trigger error if file doesn't exist
       return;
     }
 
-    // If all checks pass, proceed to load the file content
+    // Proceed to load the DOCX content if the file is valid
     await _loadDocxContent(file);
   }
 
-  // Method to load .docx content from the file
+  /// Loads the content from the DOCX file.
+  ///
+  /// This method reads the DOCX file as bytes and converts it to text using the [docx_to_text] package.
+  /// If an error occurs during this process, it is caught and handled.
   Future<void> _loadDocxContent(File file) async {
     try {
       // Read the file as bytes
@@ -73,27 +92,29 @@ class _DocxViewState extends State<DocxView> {
       // Convert the bytes to text using the docx_to_text package
       final content = docxToText(fileBytes);
 
-      // Update the state with the extracted content
+      // Update the state to display the loaded content
       setState(() {
-        fileContent = content; // Set the extracted content
-        isLoading = false; // Mark loading as complete
+        fileContent = content;
+        isLoading = false; // Set loading to false once the content is loaded
       });
     } catch (e) {
-      // In case of any error during reading or conversion, handle the error
+      // If there's an error during file reading, handle it
       _handleError(Exception("Error reading file: ${e.toString()}"));
     }
   }
 
-  // Centralized error handling method
+  /// Handles errors by calling the [onError] callback if provided, or displaying the error message.
+  ///
+  /// If the [onError] callback is provided, it is invoked with the error.
+  /// If not, the error message is displayed in the widget's content.
   void _handleError(Exception error) {
-    // If an onError callback is provided, pass the error to the callback
     if (widget.onError != null) {
-      widget.onError!(error);
+      widget.onError!(error); // Pass the error to the provided callback
     } else {
-      // If no callback is provided, handle the error locally by displaying the error message
+      // Display the error message if no callback is provided
       setState(() {
-        fileContent = error.toString(); // Display error message as file content
-        isLoading = false; // Mark loading as complete
+        fileContent = error.toString();
+        isLoading = false; // Set loading to false when error is handled
       });
     }
   }
@@ -101,19 +122,19 @@ class _DocxViewState extends State<DocxView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(
-          _padding), // Apply padding around the widget's content
+      padding:
+          const EdgeInsets.all(_padding), // Apply padding around the content
       child: isLoading
           ? const Center(
               child:
-                  CircularProgressIndicator()) // Show a loading spinner while content is being loaded
+                  CircularProgressIndicator()) // Show loading spinner while content is loading
           : SingleChildScrollView(
               child: Text(
                 fileContent ??
-                    'No content to display.', // Display the loaded content or a default message
+                    'No content to display.', // Display the file content or an error message
                 style: TextStyle(
                     fontSize: widget.fontSize
-                        .toDouble()), // Set the text style based on the provided font size
+                        .toDouble()), // Set font size based on user input
               ),
             ),
     );

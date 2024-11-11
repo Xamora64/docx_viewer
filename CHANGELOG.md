@@ -1,5 +1,9 @@
 ## Changelog
 
+## 0.2.1
+- Updated the README.md
+- Added the Handeling of the File From the Internet or Network too.
+
 ## 0.2.0
 - Added the `extractTextFromDocx` method to extract text from the DOCX file.
 

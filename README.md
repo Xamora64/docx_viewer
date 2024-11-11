@@ -16,7 +16,7 @@ A Flutter package for displaying DOCX files as text in your app. This package us
 - To use this package, add `docx_viewer` to your `pubspec.yaml` file:
 ```yaml
 dependencies:
-  docx_viewer: ^0.1.3
+  docx_viewer: ^latest_version
 ```
 - Then run:
 ```bash

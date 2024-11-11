@@ -7,6 +7,7 @@ A Flutter package for displaying DOCX files as text in your app. This package us
 
 - Read and display the content of DOCX files.
 - Supports `.docx` and `.doc` file formats.
+- Can handle files from the internet or network.
 - Handles file validation, such as checking if the file exists and if the file type is supported.
 - Provides a customizable error handling callback via the `onError` parameter.
 - Optionally customize the font size for displaying the text.

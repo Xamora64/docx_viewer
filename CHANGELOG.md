@@ -1,13 +1,3 @@
-## Changelog
+## 0.0.1
 
-## 0.1.1
-- Added Example Code 
-- Updated the README.md
-- Handles file validation (file path check, file type check, file existence check). 
-- Added error handling with an optional callback function (`onError`). 
-- Customizable font size for text display.
-
-## 0.1.0
-- Initial release of the `docx_viewer` package. 
-- Added support for displaying DOCX files as text. 
-
+* TODO: Describe initial release.

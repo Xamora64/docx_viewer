@@ -1,3 +1,7 @@
 library docx_viewer;
 
-export 'src/docx_view.dart';
+/// A Calculator.
+class Calculator {
+  /// Returns [value] plus 1.
+  int addOne(int value) => value + 1;
+}

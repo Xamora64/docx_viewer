@@ -78,7 +78,7 @@ If you find this package helpful and would like to support its development, cons
 ### These are supported funding model platforms:
 
 - **GitHub Sponsors**: [santoshvandari](https://github.com/sponsors/santoshvandari)
-- **Open Collective**: [santoshvandari](https://opencollective.com/santoshvandari)
+<!-- - **Open Collective**: [santoshvandari](https://opencollective.com/santoshvandari) -->
 - **Ko-fi**: [santoshvandari](https://ko-fi.com/santoshvandari)
 - **Buy Me a Coffee**: [santoshvandari](https://www.buymeacoffee.com/santoshvandari)
 

@@ -4,7 +4,7 @@ import 'package:docx_viewer/utils/support_type.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-/// A widget for displaying Word documents, including .doc and .docx file types.
+/// A widget for displaying Word documents, includingand .docx file types.
 ///
 /// The [DocxView] widget takes a [filePath], an optional [fontSize], and an optional [onError] callback function.
 /// It reads the content of the DOCX file and displays it as text within a Flutter application.
@@ -77,9 +77,8 @@ class _DocxViewState extends State<DocxView> {
       // check the file extension  to determine the file type
       final fileExtension = file.path.split('.').last.toLowerCase();
 
-      // Check if the file extension is supported (DOCX or DOC)
-      if (fileExtension != Supporttype.docx &&
-          fileExtension != Supporttype.doc) {
+      // Check if the file extension is supported (DOCX)
+      if (fileExtension != Supporttype.docx) {
         _handleError(Exception("Unsupported file type: .$fileExtension"));
         return;
       }

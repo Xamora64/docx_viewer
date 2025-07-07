@@ -64,7 +64,7 @@ class _DocxViewState extends State<DocxView> {
     // Check if the file path is empty
     if ((widget.filePath == null || widget.filePath!.isEmpty) &&
     	widget.file == null && widget.bytes == null) {
-      _handleError(Exception("File path is empty. there isn't file and bytes not defined"));
+      _handleError(Exception("No input provided. You must specify either filePath, file, or bytes."));
       return;
     }
 

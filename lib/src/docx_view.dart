@@ -68,6 +68,7 @@ class _DocxViewState extends State<DocxView> {
       return;
     }
 
+    // Ensure that only one of the three parameters bytes, file or filePath is provided.
     if (((widget.bytes != null) && (widget.file != null || widget.filePath != null)) ||
         ((widget.file != null) && (widget.filePath != null))) {
       _handleError(Exception("Define only filePath, file or bytes"));
